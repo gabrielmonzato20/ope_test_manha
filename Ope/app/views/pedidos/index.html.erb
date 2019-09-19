@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pedidos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Atendente</th>
+      <th>Produtos</th>
+      <th>Total</th>
+      <th colspan="3">Acoes</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pedidos.each do |pedido| %>
+      <%valor = 0%>
+      <tr>
+        <td><%= pedido.cliente.nome %></td>
+        <td><%= pedido.atendente.nome %></td>
+        <td> 
+        <% pedido.produtos.each do |produto| %>   
+          
+          <%= produto.descricao =%>
+          <%end%> 
+          </td>
+          <td> 
+          <% pedido.produtos.each do |produto| %>   
+            
+            <% valor = valor + produto.preco %>
+            <%end%> 
+            <%= valor =%>
+            </td>
+        <td><%= link_to 'Show', pedido %></td>
+        <td><%= link_to 'Edit', edit_pedido_path(pedido) %></td>
+        <td><%= link_to 'Destroy', pedido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pedido', new_pedido_path %>

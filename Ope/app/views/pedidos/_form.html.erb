@@ -1,0 +1,31 @@
+<%= form_with(model: pedido, local: true) do |form| %>
+  <% if pedido.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pedido.errors.count, "error") %> prohibited this pedido from being saved:</h2>
+
+      <ul>
+        <% pedido.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :cliente %>
+    <%= collection_select(:pedido,:cliente_id,Cliente.all,:id,:nome) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :atendente %>
+    <%= collection_select(:pedido,:atendente_id,Atendente.all,:id,:nome) %>
+  </div>
+  <div class="field">
+  <%= form.label :produtos %>
+  <%= collection_check_boxes(:pedido,:produto_ids,Produto.all,:id,:descricao) %>
+</div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
